@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	   					   http://www.springframework.org/schema/context 
+	   					   http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	   					   http://www.springframework.org/schema/jee 
+	   					   http://www.springframework.org/schema/jee/spring-jee-2.5.xsd ">
+
+
+	<jee:jndi-lookup id="dcfacturador" jndi-name="jdbc/dcfacturador" resource-ref="true" cache="true"></jee:jndi-lookup>
+	
+	 <!-- Definicion para Spring -->
+	<bean id="txxxxDAO" class="sfs.model.dao.spring.TxxxxDAOImpl">
+		<property name="dataSource" ref="dcfacturador" />
+	</bean>
+	
+	<bean id="txxxyDAO" class="sfs.model.dao.spring.TxxxyDAOImpl">
+		<property name="dataSource" ref="dcfacturador" />
+	</bean>
+	
+	<bean id="txxxzDAO" class="sfs.model.dao.spring.TxxxzDAOImpl">
+		<property name="dataSource" ref="dcfacturador" />
+	</bean>
+	
+		
+</beans>

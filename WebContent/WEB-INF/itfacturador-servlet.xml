@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    					   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    					   http://www.springframework.org/schema/context
+    					   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    					   http://www.springframework.org/schema/mvc 
+    					   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    					   http://www.springframework.org/schema/task
+						   http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+    					   >
+	
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+	  <property name="location">
+	  	<value>file:${SUNAT_HOME}/servers/sfs/util/scheduler.properties</value>
+	  </property>
+	  <property name="ignoreUnresolvablePlaceholders" value="true"/>
+	</bean>
+	   
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> 
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+	
+	<context:annotation-config />
+	<context:component-scan base-package="sfs.controller,
+										  sfs.service,
+										  sfs.job,
+										  sfs.ws" />
+	
+	<task:annotation-driven/>	
+	<mvc:annotation-driven/>
+		
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"      
+							p:viewClass="org.springframework.web.servlet.view.JstlView" 
+							p:prefix="/WEB-INF/jsp/"          
+							p:suffix=".jsp"> 
+	</bean>
+			
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionAttribute" value="beanErr"></property>
+		<property name="defaultErrorView" value="PagE"></property>
+	</bean>
+	
+</beans>
